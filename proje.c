@@ -164,8 +164,6 @@ void getPersonalityType()
 
     printf("%s\n\nAçıklama: ", personality);
     getPersonalityTypeDescription(personality);
-
-    // TODO: Açıklama yaz
 }
 
 int getPersonalityQuestionScore(int line)
