@@ -2,15 +2,19 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <string.h>
+// Tüm dizileri bulunduğu dosyayı ekler
 #include "array.c"
 
+// Maksimum küre sayısı
 const int max = 5;
 
+// Boş satır
 void nullLine()
 {
     printf("\n");
 }
 
+// Küre oluşturucu
 void createCircle(int count)
 {
     for (int i = 0; i < count; i++)
@@ -23,6 +27,7 @@ void createCircle(int count)
     }
 }
 
+// Kişilik testinde çıkan sonuca göre açıklama yapar
 void getPersonalityTypeDescription(char *personality)
 {
     int x = 0;
@@ -30,6 +35,7 @@ void getPersonalityTypeDescription(char *personality)
     {
         for (int j = 0; j < 5; j++)
         {
+            // I N T J - A 
             if (personality[j] == type[i][j])
             {
                 x++;
@@ -45,6 +51,7 @@ void getPersonalityTypeDescription(char *personality)
     printf("%s", typeDescription[x / 2]);
 }
 
+// Kişilik testi sonucunu kullanıcıya veriyor
 void getPersonalityType()
 {
     char personality[6];
@@ -76,35 +83,40 @@ void getPersonalityType()
 
 int getPersonalityQuestionScore(int line)
 {
+    // key = 13 Enter tuşu
+    // key = 77 Sağ ok tuşu
+    // key = 75 Sol ok tuşu
     char key;
-    int score = 1;
+    int count = 1;
 
     while (key != 13)
     {
         key = getch();
+        // Bulunduğu satırı siliyor
         printf("\33[2K\r");
-        if (key == 77 && score < max)
+        if (key == 77 && count < max)
         {
-            score++;
+            count++;
         }
-        else if (key == 75 && score > 1)
+        else if (key == 75 && count > 1)
         {
-            score--;
+            count--;
         }
 
-        createCircle(score);
+        createCircle(count);
     }
 
     nullLine();
-    return scores[line][score - 1];
+    return scores[line][count - 1];
 }
 
+// Kişilik testinin sorularını metin belgesinden çeken fonksiyondur
 void getPersonalityQuestionData()
 {
     FILE *textfile;
     char line[255];
 
-    int score = 0, i = 0;
+    int i = 0;
 
     textfile = fopen("question.txt", "r");
 
@@ -127,9 +139,6 @@ void getPersonalityQuestionData()
                 break;
             case 3:
                 categoriesScores[4] += getPersonalityQuestionScore(i);
-                break;
-            case 4:
-                categoriesScores[5] += getPersonalityQuestionScore(i);
                 break;
             }
             nullLine();
