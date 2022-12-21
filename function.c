@@ -86,7 +86,7 @@ int getPersonalityQuestionScore(int line)
     // key = 77 Sağ ok tuşu
     // key = 75 Sol ok tuşu
     char key;
-    int count = 1;
+    int count = 3;
 
     while (key != 13)
     {
@@ -124,7 +124,7 @@ void getPersonalityQuestionData()
         if (line != "")
         {
             printf("%s", line);
-            printf("●○○○○");
+            printf("●●●○○");
             switch (i / 5)
             {
             case 0:
