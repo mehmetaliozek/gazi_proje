@@ -78,6 +78,7 @@ void getPersonalityType()
 
     printf("%s\n\nAçıklama: ", personality);
     getPersonalityTypeDescription(personality);
+    getch();
 }
 
 int getPersonalityQuestionScore(int line)
