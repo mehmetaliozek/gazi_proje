@@ -1,11 +1,14 @@
-char categories[5][2] = {
+// Kişilik tiplerindeki harfleri tutar yan yana olan her harf birbirinin zıttıdır
+char categories[6][2] = {
     {'E', 'I'},
     {'N', 'S'},
     {'T', 'F'},
     {'J', 'P'},
+    {'-', '-'},
     {'A', 'T'},
 };
 
+// Her bir soruya ne kadar katıldığımıza göre veren puanları tutar
 int scores[20][5] = {
     {-4, -2, 0, 2, 4},
     {-8, -4, 0, 4, 8},
@@ -32,43 +35,30 @@ int scores[20][5] = {
     {-6, -3, 0, 3, 6},
 };
 
-int categoriesScores[5] = {50, 50, 50, 50, 50};
+// Her bir kategorinin toplam puanını tutar sorular ile bu puanlar azalıp artar ve bir tipe yaklaşır
+int categoriesScores[5] = {50, 50, 50, 50, 10};
 
-char type[32][7] = {
-    {"INTJ-A\0"},
-    {"INTJ-T\0"},
-    {"INTP-A\0"},
-    {"INTP-T\0"},
-    {"ENTJ-A\0"},
-    {"ENTJ-T\0"},
-    {"ENTP-A\0"},
-    {"ENTP-T\0"},
-    {"INFJ-A\0"},
-    {"INFJ-T\0"},
-    {"INFP-A\0"},
-    {"INFP-T\0"},
-    {"ENFJ-A\0"},
-    {"ENFJ-T\0"},
-    {"ENFP-A\0"},
-    {"ENFP-T\0"},
-    {"ISTJ-A\0"},
-    {"ISTJ-T\0"},
-    {"ISFJ-A\0"},
-    {"ISFJ-T\0"},
-    {"ESTJ-A\0"},
-    {"ESTJ-T\0"},
-    {"ESFJ-A\0"},
-    {"ESFJ-T\0"},
-    {"ISTP-A\0"},
-    {"ISTP-T\0"},
-    {"ISFP-A\0"},
-    {"ISFP-T\0"},
-    {"ESTP-A\0"},
-    {"ESTP-T\0"},
-    {"ESFP-A\0"},
-    {"ESFP-T\0"},
+// Kişilik tiplerini tutar
+char type[16][5] = {
+    {"INTJ\0"},
+    {"INTP\0"},
+    {"ENTJ\0"},
+    {"ENTP\0"},
+    {"INFJ\0"},
+    {"INFP\0"},
+    {"ENFJ\0"},
+    {"ENFP\0"},
+    {"ISTJ\0"},
+    {"ISFJ\0"},
+    {"ESTJ\0"},
+    {"ESFJ\0"},
+    {"ISTP\0"},
+    {"ISFP\0"},
+    {"ESTP\0"},
+    {"ESFP\0"},
 };
 
+// Test sonucunda çıkan kişiliğe özel açıklama yapar
 char typeDescription[16][500] = {
     {"Her şey için bir planı olan hayalperest ve stratejik düşünenler.\n\nÖrnek: Elon Musk - Walter White - Gandalf\0"},
     {"Bilgi için bastırılamaz bir susuzluğu olan yenilikçi mucitler.\n\nÖrnek: Bill Gates - Albert Einstain - Neo\0"},

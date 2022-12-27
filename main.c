@@ -1,8 +1,12 @@
 // Tüm fonksiyonların bulunduğu dosyayı ekler
 #include "function.c"
+#include <windows.h>
 
 void main()
 {
+    // Terminali UTF-8 karakterleri desteklemesini sağlar
+    SetConsoleOutputCP(CP_UTF8);
+
     // Terminali temizler
     printf("\e[1;1H\e[2J");
 

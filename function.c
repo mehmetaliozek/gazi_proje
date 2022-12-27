@@ -17,10 +17,12 @@ void nullLine()
 // Küre oluşturucu
 void createCircle(int count)
 {
+    // Parametre olarak alınan count değeri içi dolu kadar küre koyar
     for (int i = 0; i < count; i++)
     {
         printf("●");
     }
+    // Parametre olarak alınan count değerini 5 e tamamlıcak kadar içi boş kadar küre koyar
     for (int i = 0; i < max - count; i++)
     {
         printf("○");
@@ -30,24 +32,33 @@ void createCircle(int count)
 // Kişilik testinde çıkan sonuca göre açıklama yapar
 void getPersonalityTypeDescription(char *personality)
 {
-    int x = 0;
-    for (int i = 0; i < 32; i++)
+    int x;
+    // Test sonucunda çıkan kişiliğin elimizde type dizinde hangi indexte diye arama yapar
+    // 16 tane kişilik olduğu için 16 defa döner
+    for (int i = 0; i < 16; i++)
     {
-        for (int j = 0; j < 5; j++)
+        x = 0;
+        // type dizisindeki her bir eleman 4 karakterden olduğu için 4 defa çalışcak bir for
+        for (int j = 0; j < 4; j++)
         {
+            // For her çalıştığında bulunduğu indexteki tipin her bir harfini test sonucundaki tipin her bir harfiyle kıyaslar
             if (personality[j] == type[i][j])
             {
+                // Harfler aynı ise x değişkenini artırır
                 x++;
             }
         }
-        if (x == 5)
+        // x değişkeni 4 ise tüm harfler eşit anlama gelir
+        if (x == 4)
         {
+            // i değeri type dizisinde test sonucunda çıkan tipin bulunduğu indextir
+            // Bu indexi ilerde kullanmak için x değişkenine atıyoruz ve döngüyü kırıyoruz
             x = i;
             break;
         }
-        x = 0;
     }
-    printf("%s", typeDescription[x / 2]);
+    // typeDescription dizisinden bizim tipimize ait olan açıklamayı ekrana yazdırır
+    printf("%s", typeDescription[x]);
 }
 
 // Kişilik testi sonucunu kullanıcıya veriyor
@@ -57,20 +68,14 @@ void getPersonalityType()
 
     for (int i = 0; i < 6; i++)
     {
-        if (i != 4)
+        // categoriesScores[i] nin değerine göre categories dizinden hangi harfi alcağını belirler
+        if (categoriesScores[i] < 50)
         {
-            if (categoriesScores[i] < 50)
-            {
-                personality[i] = i != 5 ? categories[i][0] : categories[i - 1][0];
-            }
-            else
-            {
-                personality[i] = i != 5 ? categories[i][1] : categories[i - 1][1];
-            }
+            personality[i] = categories[i][0];
         }
         else
         {
-            personality[i] = '-';
+            personality[i] = categories[i][1];
         }
     }
 
@@ -81,12 +86,15 @@ void getPersonalityType()
     getch();
 }
 
+// İlgili sorunun cevabına göre puanını döndüren fonksiyon
 int getPersonalityQuestionScore(int line)
 {
     // key = 13 Enter tuşu
     // key = 77 Sağ ok tuşu
     // key = 75 Sol ok tuşu
+    // Klavyeden hangi tuşa basıldığını tutan değişkenimiz
     char key;
+    // Ekranda oluşcak küre sayısı
     int count = 3;
 
     while (key != 13)
@@ -94,19 +102,25 @@ int getPersonalityQuestionScore(int line)
         key = getch();
         // Bulunduğu satırı siliyor
         printf("\33[2K\r");
+        // Sağ ok tuşuna basıldıysa ve ekranda max değerinden az küre varsa küre sayısını arttırıyor
         if (key == 77 && count < max)
         {
             count++;
         }
+        // Sol ok tuşuna basıldıysa ve ekranda 1 den fazla küre varsa küre sayısını azaltıyor
         else if (key == 75 && count > 1)
         {
             count--;
         }
 
+        // Küre oluşturucu fonksiyon
         createCircle(count);
     }
 
     nullLine();
+    // line değişkeni sorunun kaçıncı satırda olduğunu yani numarası tutuyor
+    // count ise bulununan sorunun hangi seçeneğini işaretlendiğini tutuyor
+    // scores dizisinden yukardaki bilgiler yardımıyla soruya ve seçeneğe özgü puanı geri döndürüyor
     return scores[line][count - 1];
 }
 
@@ -114,18 +128,26 @@ int getPersonalityQuestionScore(int line)
 void getPersonalityQuestionData()
 {
     FILE *textfile;
+    // Her bir satırdan gelen soruları aktardığımız dizi
     char line[255];
 
+    // Satır sayısının 1 eksiğini tutuyor ki gerekli dizilerde azaltma yapmadan kullanabilelim
     int i = 0;
 
     textfile = fopen("question.txt", "r");
 
     while (fgets(line, 255, textfile))
     {
+        // Metin belgesinden boş satır gelmediği sürece aşağıdaki işlemleri gerçekleştirir
         if (line != "")
         {
+            // Soruyu ekrana yazdırır
             printf("%s", line);
+            // Varsayılan küre sayısını (Kararsızım) hazırlar
             printf("●●●○○");
+            // Her 5 soru bir kategoriyi ilgilendiriyor ve bizde bu soruları sırayla soruyoruz
+            // i satır saysını 5 e bölerek kategori geçişlerini tespit etmekteyiz
+            // Buna görede ilgili kategorinin puanı artmakta
             switch (i / 5)
             {
             case 0:
