@@ -154,13 +154,13 @@ void getPersonalityQuestionData()
                 categoriesScores[0] += getPersonalityQuestionScore(i);
                 break;
             case 1:
-                categoriesScores[2] += getPersonalityQuestionScore(i);
+                categoriesScores[1] += getPersonalityQuestionScore(i);
                 break;
             case 2:
-                categoriesScores[3] += getPersonalityQuestionScore(i);
+                categoriesScores[2] += getPersonalityQuestionScore(i);
                 break;
             case 3:
-                categoriesScores[4] += getPersonalityQuestionScore(i);
+                categoriesScores[3] += getPersonalityQuestionScore(i);
                 break;
             }
             nullLine();

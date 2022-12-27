@@ -36,7 +36,7 @@ int scores[20][5] = {
 };
 
 // Her bir kategorinin toplam puanını tutar sorular ile bu puanlar azalıp artar ve bir tipe yaklaşır
-int categoriesScores[5] = {50, 50, 50, 50, 10};
+int categoriesScores[5] = {50, 50, 50, 50, 50};
 
 // Kişilik tiplerini tutar
 char type[16][5] = {
